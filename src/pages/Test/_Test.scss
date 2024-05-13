@@ -1,9 +1,0 @@
-@use '@style/mixins.scss' as *;
-@use '@style/variables.scss' as *;
-
-.test {
-  @include flexJccAic;
-  height: 200px;
-  font-size: 3rem;
-  color: $secondary-color;
-}
