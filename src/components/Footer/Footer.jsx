@@ -1,5 +1,9 @@
 const Footer = () => {
-  return <footer>Ceci est le footer</footer>;
+  return (
+    <footer>
+      <p className='footer-text'>Copyright 2020 Argent Bank</p>
+    </footer>
+  );
 };
 
 export default Footer;
