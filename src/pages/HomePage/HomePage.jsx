@@ -1,7 +1,7 @@
 import Features from '@/components/Features/Features';
 import Hero from '@/components/Hero/Hero';
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div>
       <Hero />
@@ -10,4 +10,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

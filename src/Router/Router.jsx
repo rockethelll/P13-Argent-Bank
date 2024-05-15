@@ -1,16 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
 
 import ErrorPage from '@/pages/ErrorPage/ErrorPage';
-import Home from '@/pages/Home/Home';
-import Profile from '@/pages/Profile/Profile';
-import SignIn from '@/pages/SignIn/SignIn';
+import HomePage from '@/pages/HomePage/HomePage';
+import ProfilePage from '@/pages/ProfilePage/ProfilePage';
+import SignInPage from '@/pages/SignInPage/SignInPage';
 
 const Router = () => {
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/user/login' element={<SignIn />} />
-      <Route path='/user/profile' element={<Profile />} />
+      <Route path='/' element={<HomePage />} />
+      <Route path='/user/login' element={<SignInPage />} />
+      <Route path='/user/profile' element={<ProfilePage />} />
       <Route path='*' element={<ErrorPage />} />
     </Routes>
   );

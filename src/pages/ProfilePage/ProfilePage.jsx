@@ -1,4 +1,4 @@
-const Profile = () => {
+const ProfilePage = () => {
   return (
     <main className='main bg-dark'>
       <div className='header'>
@@ -44,4 +44,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfilePage;
