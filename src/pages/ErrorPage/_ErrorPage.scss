@@ -1,9 +1,8 @@
 @use '@style/variables.scss' as *;
+@use '@style/mixins.scss' as *;
 
 .error-404 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flexJccAic;
   flex-direction: column;
   height: 80vh;
 
