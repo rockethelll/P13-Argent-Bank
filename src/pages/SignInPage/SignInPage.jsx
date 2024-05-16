@@ -3,14 +3,16 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import SignInForm from '@/components/SignInForm/SignInForm';
+import { setSessionCookie } from '@/state/cookie';
 
 const SignInPage = () => {
   const token = useSelector((state) => state.authentication.token);
   const navigate = useNavigate();
 
-  // Redirect to home page if user is already authenticated and cannot access the sign-in page anymore
+  // Redirect to home page if user is already authenticated, cannot access the sign-in page anymore and set the session cookie
   useEffect(() => {
     if (token) {
+      setSessionCookie(token);
       navigate('/', { replace: true });
     }
   }, [token, navigate]);

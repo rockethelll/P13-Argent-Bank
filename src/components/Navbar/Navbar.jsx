@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom/dist';
 
 import { logout } from '@/state/authenticationSlice';
+import { removeSessionCookie } from '@/state/cookie';
 
 const Navbar = () => {
   const isAuthenticated = useSelector(
@@ -14,6 +15,7 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     dispatch(logout());
+    removeSessionCookie();
     navigate('/', { replace: true });
   };
 

@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import * as z from 'zod';
 
 import Input from '@/components/Input/Input';
@@ -16,6 +15,8 @@ const SignInFormSchema = z.object({
 });
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
+
   // Use the useForm hook to manage the form state
   const {
     formState: { errors, isSubmitting },
@@ -26,7 +27,6 @@ const SignInForm = () => {
     resolver: zodResolver(SignInFormSchema),
   });
 
-  const dispatch = useDispatch();
   // Handle the form submission
   const onSubmit = (data) => {
     try {
