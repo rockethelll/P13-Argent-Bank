@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import api from '@/api';
 import Input from '@/components/Input/Input';
 
 const SignInFormSchema = z.object({
@@ -23,22 +24,29 @@ const SignInForm = () => {
 
   const onSubmit = async (data) => {
     try {
+      const response = await api.post('/user/login', data);
+      console.log('response', response.data.body.token);
       console.log('data', data);
-    } catch (e) {
+    } catch {
       console.error('erreur form');
       setError('root', {
-        message: e.data.message,
+        message: 'error',
       });
     }
   };
 
   return (
     <form>
-      <Input {...register('email')} label='Email' />
+      <Input {...register('email')} label='Email' value='tony@stark.com' />
       {errors['email'] && (
         <div className='input-error'>{errors['email'].message}</div>
       )}
-      <Input {...register('password')} type='password' label='Password' />
+      <Input
+        {...register('password')}
+        type='password'
+        label='Password'
+        value='password123'
+      />
       {errors['password'] && (
         <div className='input-error'>{errors['password'].message}</div>
       )}
