@@ -1,15 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import * as z from 'zod';
 
-import api from '@/api';
 import Input from '@/components/Input/Input';
+import { login } from '@/state/authenticationSlice';
 
 const SignInFormSchema = z.object({
   email: z.string().email({ message: 'Enter a valid email' }),
   password: z
     .string()
-    .min(8, { message: 'Pasword must be at least 8 characters' }),
+    .min(8, { message: 'Password must be at least 8 characters' }),
 });
 
 const SignInForm = () => {
@@ -22,13 +24,14 @@ const SignInForm = () => {
     resolver: zodResolver(SignInFormSchema),
   });
 
-  const onSubmit = async (data) => {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.authentication.token);
+
+  const onSubmit = (data) => {
     try {
-      const response = await api.post('/user/login', data);
-      console.log('response', response.data.body.token);
-      console.log('data', data);
-    } catch {
-      console.error('erreur form');
+      dispatch(login(data));
+    } catch (error) {
+      console.error('erreur form', error);
       setError('root', {
         message: 'error',
       });
@@ -36,33 +39,39 @@ const SignInForm = () => {
   };
 
   return (
-    <form>
-      <Input {...register('email')} label='Email' value='tony@stark.com' />
-      {errors['email'] && (
-        <div className='input-error'>{errors['email'].message}</div>
-      )}
-      <Input
-        {...register('password')}
-        type='password'
-        label='Password'
-        value='password123'
-      />
-      {errors['password'] && (
-        <div className='input-error'>{errors['password'].message}</div>
-      )}
-      <div className='input-remember'>
-        <input type='checkbox' id='remember-me' />
-        <label htmlFor='remember-me'>Remember me</label>
+    <>
+      <div>
+        {/* Votre formulaire JSX et le reste du code ici */}
+        {token && <div>Token: {token}</div>}
       </div>
-      <button
-        className='sign-in-button'
-        disabled={isSubmitting}
-        onClick={handleSubmit(onSubmit)}
-      >
-        {isSubmitting ? 'Loading...' : 'Sign In'}
-      </button>
-      {errors.root && <div className='submit-error'>{errors.root.message}</div>}
-    </form>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          {...register('email')}
+          label='Email'
+          defaultValue='tony@stark.com'
+        />
+        {errors.email && (
+          <div className='input-error'>{errors.email.message}</div>
+        )}
+        <Input
+          {...register('password')}
+          type='password'
+          label='Password'
+          defaultValue='password123'
+        />
+        {errors.password && (
+          <div className='input-error'>{errors.password.message}</div>
+        )}
+        <div className='input-remember'>
+          <input type='checkbox' id='remember-me' {...register('remember')} />
+          <label htmlFor='remember-me'>Remember me</label>
+        </div>
+        <button className='sign-in-button' disabled={isSubmitting}>
+          {isSubmitting ? 'Loading...' : 'Sign In'}
+        </button>
+        {errors.api && <div className='submit-error'>{errors.api.message}</div>}
+      </form>
+    </>
   );
 };
 
