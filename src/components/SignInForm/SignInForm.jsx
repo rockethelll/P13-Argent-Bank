@@ -7,6 +7,7 @@ import * as z from 'zod';
 import Input from '@/components/Input/Input';
 import { login } from '@/state/authenticationSlice';
 
+// Create a validation schema for the sign-in form
 const SignInFormSchema = z.object({
   email: z.string().email({ message: 'Enter a valid email' }),
   password: z
@@ -15,6 +16,7 @@ const SignInFormSchema = z.object({
 });
 
 const SignInForm = () => {
+  // Use the useForm hook to manage the form state
   const {
     formState: { errors, isSubmitting },
     handleSubmit,
@@ -25,8 +27,7 @@ const SignInForm = () => {
   });
 
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.authentication.token);
-
+  // Handle the form submission
   const onSubmit = (data) => {
     try {
       dispatch(login(data));
@@ -39,39 +40,33 @@ const SignInForm = () => {
   };
 
   return (
-    <>
-      <div>
-        {/* Votre formulaire JSX et le reste du code ici */}
-        {token && <div>Token: {token}</div>}
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Input
+        {...register('email')}
+        label='Email'
+        defaultValue='tony@stark.com'
+      />
+      {errors.email && (
+        <div className='input-error'>{errors.email.message}</div>
+      )}
+      <Input
+        {...register('password')}
+        type='password'
+        label='Password'
+        defaultValue='password123'
+      />
+      {errors.password && (
+        <div className='input-error'>{errors.password.message}</div>
+      )}
+      <div className='input-remember'>
+        <input type='checkbox' id='remember-me' {...register('remember')} />
+        <label htmlFor='remember-me'>Remember me</label>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          {...register('email')}
-          label='Email'
-          defaultValue='tony@stark.com'
-        />
-        {errors.email && (
-          <div className='input-error'>{errors.email.message}</div>
-        )}
-        <Input
-          {...register('password')}
-          type='password'
-          label='Password'
-          defaultValue='password123'
-        />
-        {errors.password && (
-          <div className='input-error'>{errors.password.message}</div>
-        )}
-        <div className='input-remember'>
-          <input type='checkbox' id='remember-me' {...register('remember')} />
-          <label htmlFor='remember-me'>Remember me</label>
-        </div>
-        <button className='sign-in-button' disabled={isSubmitting}>
-          {isSubmitting ? 'Loading...' : 'Sign In'}
-        </button>
-        {errors.api && <div className='submit-error'>{errors.api.message}</div>}
-      </form>
-    </>
+      <button className='sign-in-button' disabled={isSubmitting}>
+        {isSubmitting ? 'Loading...' : 'Sign In'}
+      </button>
+      {errors.api && <div className='submit-error'>{errors.api.message}</div>}
+    </form>
   );
 };
 

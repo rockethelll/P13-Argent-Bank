@@ -8,6 +8,7 @@ const SignInPage = () => {
   const token = useSelector((state) => state.authentication.token);
   const navigate = useNavigate();
 
+  // Redirect to home page if user is already authenticated and cannot access the sign-in page anymore
   useEffect(() => {
     if (token) {
       navigate('/', { replace: true });
