@@ -1,12 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import Cookies from 'js-cookie';
 
 import api from '@/api';
 
 const initialState = {
-  token: null,
+  token: Cookies.get('token') || null,
   loading: 'idle',
   error: null,
-  isAuthenticated: false,
+  // isAuthenticated is true if the token exists !! is a way to convert a value to a boolean
+  isAuthenticated: !!Cookies.get('token'),
 };
 
 export const login = createAsyncThunk(
@@ -28,6 +30,7 @@ const authenticationSlice = createSlice({
     logout(state) {
       state.token = null;
       state.isAuthenticated = false;
+      Cookies.remove('token');
     },
   },
   extraReducers(builder) {
@@ -40,6 +43,11 @@ const authenticationSlice = createSlice({
         state.loading = 'success';
         state.token = action.payload.body.token;
         state.isAuthenticated = true;
+        Cookies.set('token', action.payload.body.token, {
+          secure: true, // cookie is only sent over HTTPS
+          sameSite: 'strict', // cookie is not sent on cross-origin requests
+          expires: 1 / 48, // 30 minutes
+        });
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = 'failed';
