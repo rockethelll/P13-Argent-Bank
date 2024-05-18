@@ -12,6 +12,7 @@ const Navbar = () => {
   const isAuthenticated = useSelector(
     (state) => state.authentication.isAuthenticated,
   );
+  const userFirstName = useSelector((state) => state.user?.firstName);
 
   const handleLogOut = () => {
     dispatch(logout());
@@ -33,7 +34,7 @@ const Navbar = () => {
           <>
             <NavLink className='main-nav-item' to='/user'>
               <i className='fa fa-user-circle'></i>
-              User Informations
+              {userFirstName}
             </NavLink>
             <NavLink className='main-nav-item' to='/' onClick={handleLogOut}>
               <i className='fas fa-sign-out-alt'></i>

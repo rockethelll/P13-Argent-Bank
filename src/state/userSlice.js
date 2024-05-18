@@ -28,7 +28,6 @@ export const fetchUser = createAsyncThunk(
         throw new Error('Problème de connexion');
       }
       const data = response.data.body;
-      console.log('response', data);
 
       return data;
     } catch (error) {
