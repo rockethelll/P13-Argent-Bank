@@ -32,7 +32,6 @@ const SignInForm = () => {
     try {
       dispatch(login(data));
     } catch (error) {
-      console.error('erreur form', error);
       setError('root', {
         message: 'error',
       });

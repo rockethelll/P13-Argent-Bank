@@ -7,11 +7,12 @@ import { logout } from '@/state/authenticationSlice';
 import { removeSessionCookie } from '@/state/cookie';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const isAuthenticated = useSelector(
     (state) => state.authentication.isAuthenticated,
   );
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleLogOut = () => {
     dispatch(logout());

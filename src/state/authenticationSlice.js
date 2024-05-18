@@ -2,25 +2,24 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import api from '@/api';
 
-export const login = createAsyncThunk(
-  'authentication/login',
-  async (data, { rejectWithValue }) => {
-    try {
-      const response = await api.post('/user/login', data);
-      console.log('response', response.data);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
-  },
-);
-
 const initialState = {
   token: null,
   loading: 'idle',
   error: null,
   isAuthenticated: false,
 };
+
+export const login = createAsyncThunk(
+  'authentication/login',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await api.post('/login', data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
 
 const authenticationSlice = createSlice({
   name: 'authentication',

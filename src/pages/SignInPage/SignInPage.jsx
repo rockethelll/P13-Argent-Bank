@@ -1,21 +1,25 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import SignInForm from '@/components/SignInForm/SignInForm';
 import { setSessionCookie } from '@/state/cookie';
+import { fetchUser } from '@/state/userSlice';
 
 const SignInPage = () => {
-  const token = useSelector((state) => state.authentication.token);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.authentication.token);
 
   // Redirect to home page if user is already authenticated, cannot access the sign-in page anymore and set the session cookie
   useEffect(() => {
     if (token) {
       setSessionCookie(token);
+      dispatch(fetchUser(token));
       navigate('/', { replace: true });
     }
-  }, [token, navigate]);
+  }, [token, navigate, dispatch]);
 
   return (
     <div className='main bg-dark'>
