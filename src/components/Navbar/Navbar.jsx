@@ -1,18 +1,27 @@
+import Cookies from 'js-cookie';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom/dist';
 
 import { logout } from '@/state/authenticationSlice';
+import { fetchUser } from '@/state/userSlice';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const token = Cookies.get('token');
 
-  const isAuthenticated = useSelector(
-    (state) => state.authentication.isAuthenticated,
-  );
+  const cookie = Cookies.get('token');
   const userFirstName = useSelector((state) => state.user?.firstName);
+
+  // Fetch user data if the user is authenticated
+  useEffect(() => {
+    if (cookie && !userFirstName) {
+      dispatch(fetchUser(token));
+    }
+  }, [cookie, dispatch, userFirstName, token]);
 
   const handleLogOut = () => {
     dispatch(logout());
@@ -30,7 +39,7 @@ const Navbar = () => {
         <h1 className='sr-only'>Argent Bank</h1>
       </NavLink>
       <div>
-        {isAuthenticated ? (
+        {cookie ? (
           <>
             <NavLink className='main-nav-item' to='/user/profile'>
               <i className='fa fa-user-circle'></i>
