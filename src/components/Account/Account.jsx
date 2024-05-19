@@ -1,18 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
-const Account = () => {
-  // const user = useSelector((state) => state.user.firstName);
-  // console.log('user', user);
-
+const Account = ({ user }) => {
   return (
     <main className='main bg-dark'>
       <div className='header'>
         <h1>
           Welcome back
           <br />
-          {/* {user.firstName} {user.lastName}! */}
-          Tony Jarvis!
+          {user.firstName} {user.lastName}!
         </h1>
         <button className='edit-button'>Edit Name</button>
       </div>

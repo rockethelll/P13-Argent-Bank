@@ -32,7 +32,7 @@ const Navbar = () => {
       <div>
         {isAuthenticated ? (
           <>
-            <NavLink className='main-nav-item' to='/user'>
+            <NavLink className='main-nav-item' to='/user/profile'>
               <i className='fa fa-user-circle'></i>
               {userFirstName}
             </NavLink>

@@ -44,7 +44,7 @@ const authenticationSlice = createSlice({
         state.token = action.payload.body.token;
         state.isAuthenticated = true;
         Cookies.set('token', action.payload.body.token, {
-          secure: true, // cookie is only sent over HTTPS
+          // secure: true, // cookie is only sent over HTTPS
           sameSite: 'strict', // cookie is not sent on cross-origin requests
           expires: 1 / 48, // 30 minutes
         });

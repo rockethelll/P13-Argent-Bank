@@ -1,24 +1,28 @@
 import Cookies from 'js-cookie';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Account from '@/components/Account/Account';
 import { fetchUser } from '@/state/userSlice';
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector(
-    (state) => state.authentication.isAuthenticated,
-  );
+  const user = useSelector((state) => state.user);
 
+  const token = Cookies.get('token');
+
+  // Check if token exists and fetch user data
   useEffect(() => {
-    const token = Cookies.get('token');
-    dispatch(fetchUser(token));
-  }, [isAuthenticated, dispatch]);
+    if (token) {
+      dispatch(fetchUser(token));
+    }
+  }, [dispatch, token]);
 
-  return <Account />;
+  return (
+    <>
+      <Account user={user} />
+    </>
+  );
 };
 
 export default ProfilePage;

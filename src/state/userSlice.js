@@ -42,10 +42,10 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(fetchUser.fulfilled, (state, action) => {
-      state.email = action.payload.body.email;
-      state.firstName = action.payload.body.firstName;
-      state.lastName = action.payload.body.lastName;
-      state.id = action.payload.body.id;
+      state.email = action.payload.email;
+      state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
+      state.id = action.payload.id;
     });
   },
 });
