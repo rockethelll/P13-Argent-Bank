@@ -9,6 +9,7 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
+  // Get the token from the cookie
   const token = Cookies.get('token');
 
   // Check if token exists and fetch user data
