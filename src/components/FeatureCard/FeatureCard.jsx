@@ -1,5 +1,3 @@
-import React from 'react';
-
 const FeatureCard = ({ img, alt, title, content }) => {
   return (
     <div className='feature-item'>

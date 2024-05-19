@@ -1,5 +1,5 @@
 import FeatureCard from '@/components/FeatureCard/FeatureCard';
-import data from '@/data/data.json';
+import data from '@/data/dataHome.json';
 
 const Features = () => {
   return (
