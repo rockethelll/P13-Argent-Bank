@@ -36,17 +36,52 @@ export const fetchUser = createAsyncThunk(
   },
 );
 
+export const editUser = createAsyncThunk(
+  'user/editUser',
+  async ({ token, firstName, lastName }, { rejectWithValue }) => {
+    try {
+      const response = await api.put(
+        '/profile',
+        {
+          firstName,
+          lastName,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        },
+      );
+      return response.data;
+    } catch (error) {
+      console.error(
+        'Error:',
+        error.response ? error.response.data : error.message,
+      );
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(fetchUser.fulfilled, (state, action) => {
-      state.email = action.payload.email;
-      state.firstName = action.payload.firstName;
-      state.lastName = action.payload.lastName;
-      state.id = action.payload.id;
-    });
+    builder
+      // fetchUser cases
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        state.email = action.payload.email;
+        state.firstName = action.payload.firstName;
+        state.lastName = action.payload.lastName;
+        state.id = action.payload.id;
+      })
+      // editUser cases
+      .addCase(editUser.fulfilled, (state, action) => {
+        state.firstName = action.payload.body.firstName;
+        state.lastName = action.payload.body.lastName;
+      });
   },
 });
 

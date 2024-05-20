@@ -64,7 +64,7 @@ const SignInForm = () => {
       <button className='sign-in-button' disabled={isSubmitting}>
         {isSubmitting ? 'Loading...' : 'Sign In'}
       </button>
-      {errors.api && <div className='submit-error'>{errors.api.message}</div>}
+      {errors.root && <div className='submit-error'>{errors.root.message}</div>}
     </form>
   );
 };

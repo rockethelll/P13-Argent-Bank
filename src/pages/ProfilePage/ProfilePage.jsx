@@ -1,13 +1,12 @@
 import Cookies from 'js-cookie';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import Account from '@/components/Account/Account';
 import { fetchUser } from '@/state/userSlice';
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
 
   // Get the token from the cookie
   const token = Cookies.get('token');
@@ -21,7 +20,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      <Account user={user} />
+      <Account />
     </>
   );
 };
