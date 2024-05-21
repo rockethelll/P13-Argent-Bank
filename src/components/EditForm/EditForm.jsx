@@ -27,19 +27,25 @@ const EditForm = ({ firstName, lastName, onSubmit, onCancel }) => {
     <>
       <h1>Welcome back</h1>
       <form className='edit-form' onSubmit={handleSubmit(onSubmit)}>
-        <Input {...register('firstName')} defaultValue={firstName} />
-        {errors.firstName && (
-          <div className='input-error'>{errors.firstName.message}</div>
-        )}
-        <Input {...register('lastName')} defaultValue={lastName} />
-        {errors.lastName && (
-          <div className='input-error'>{errors.lastName.message}</div>
-        )}
+        <div className='edit-inputs'>
+          <Input {...register('firstName')} defaultValue={firstName} />
+          {errors.firstName && (
+            <div className='input-error'>{errors.firstName.message}</div>
+          )}
+          <Input {...register('lastName')} defaultValue={lastName} />
+          {errors.lastName && (
+            <div className='input-error'>{errors.lastName.message}</div>
+          )}
+        </div>
         <div className='buttons-edit'>
-          <button className='edit-button' type='submit' disabled={isSubmitting}>
+          <button
+            className='edit-button btn'
+            type='submit'
+            disabled={isSubmitting}
+          >
             {isSubmitting ? 'Loading...' : 'Save'}
           </button>
-          <button className='cancel-button' onClick={() => onCancel(reset)}>
+          <button className='cancel-button btn' onClick={() => onCancel(reset)}>
             Cancel
           </button>
         </div>

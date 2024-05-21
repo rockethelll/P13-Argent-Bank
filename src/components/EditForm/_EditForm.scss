@@ -6,15 +6,27 @@
   color: $primary-color;
   font-weight: bold;
   padding: 10px;
-  margin-left: 2cqh;
 }
 
 .buttons-edit {
+  display: flex;
   margin-top: 2rem;
+  gap: 2rem;
+
+  .btn {
+    width: 80px;
+  }
 }
 
 .edit-form {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.edit-inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
