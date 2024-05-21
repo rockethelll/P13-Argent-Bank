@@ -2,7 +2,7 @@
 
 ![Logo](./public/images/argentBankLogo.png)
 
-<https://img.shields.io/github/languages/code-size/rockethelll/P13-Argent-Bank>
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/rockethelll/P13-Argent-Bank)
 
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alec-remond/)
 
