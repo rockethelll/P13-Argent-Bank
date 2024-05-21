@@ -45,13 +45,22 @@ const Navbar = () => {
               <i className='fa fa-user-circle'></i>
               {userFirstName}
             </NavLink>
-            <NavLink className='main-nav-item' to='/' onClick={handleLogOut}>
+            <NavLink
+              className='main-nav-item'
+              to='/'
+              onClick={handleLogOut}
+              data-testid='logout-btn'
+            >
               <i className='fas fa-sign-out-alt'></i>
               Sign Out
             </NavLink>
           </>
         ) : (
-          <NavLink className='main-nav-item' to='/user/login'>
+          <NavLink
+            className='main-nav-item'
+            to='/user/login'
+            data-testid='signin-btn'
+          >
             <i className='fa fa-user-circle'></i>
             Sign In
           </NavLink>

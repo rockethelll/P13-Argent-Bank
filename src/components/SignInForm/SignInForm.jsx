@@ -43,7 +43,9 @@ const SignInForm = () => {
       <Input
         {...register('email')}
         label='Email'
-        defaultValue='tony@stark.com'
+        placeholder='tony@stark.com'
+        // defaultValue='tony@stark.com'
+        data-testid='email'
       />
       {errors.email && (
         <div className='input-error'>{errors.email.message}</div>
@@ -52,7 +54,9 @@ const SignInForm = () => {
         {...register('password')}
         type='password'
         label='Password'
-        defaultValue='password123'
+        placeholder='password123'
+        // defaultValue='password123'
+        data-testid='password'
       />
       {errors.password && (
         <div className='input-error'>{errors.password.message}</div>
@@ -61,7 +65,11 @@ const SignInForm = () => {
         <input type='checkbox' id='remember-me' {...register('remember')} />
         <label htmlFor='remember-me'>Remember me</label>
       </div>
-      <button className='sign-in-button' disabled={isSubmitting}>
+      <button
+        className='sign-in-button'
+        disabled={isSubmitting}
+        data-testid='login-btn'
+      >
         {isSubmitting ? 'Loading...' : 'Sign In'}
       </button>
       {errors.root && <div className='submit-error'>{errors.root.message}</div>}
