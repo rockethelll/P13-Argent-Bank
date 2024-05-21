@@ -1,5 +1,11 @@
 # ARGENT BANK
 
+![Logo](./public/images/argentBankLogo.png)
+
+<https://img.shields.io/github/languages/code-size/rockethelll/P13-Argent-Bank>
+
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alec-remond/)
+
 Project 13 from JavaScript React developper path at OpenClassrooms
 
 ## First clone the project and launch backend
@@ -47,3 +53,17 @@ Tests end to end are used to check the application with cypress:
 ```bash
 npm cy:open
 ```
+
+## Tech Stack
+
+**Client:** React, Redux, SCSS
+
+**Server:** Node, Express
+
+## Screenshots
+
+![App Screenshot](./public/screenshots/home.webp)
+![App Screenshot](./public/screenshots/signin.webp)
+![App Screenshot](./public/screenshots/profile.webp)
+![App Screenshot](./public/screenshots/edit.webp)
+![App Screenshot](./public/screenshots/home_logged.webp)
